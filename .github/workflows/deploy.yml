@@ -26,6 +26,14 @@ jobs:
         cd QR/frontend
         npm ci
 
+    - name: Cache dependencies
+  uses: actions/cache@v3
+  with:
+    path: |
+      node_modules
+      .npm
+    key: ${{ runner.os }}-build-${{ hashFiles('**/package-lock.json') }}
+
     - name: Build
       run: |
         cd QR/frontend
