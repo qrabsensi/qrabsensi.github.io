@@ -35,6 +35,10 @@ jobs:
         chmod +x node_modules/.bin/react-scripts
       working-directory: frontend
 
+    -name: Uninstall react-script
+     run: |
+       npm uninstall react-scripts
+
     - name: Fix react-script to a certain version
       run: |
         npm install react-scripts@5.0.1 --legacy-peer-dep
