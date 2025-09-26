@@ -29,6 +29,12 @@ jobs:
       run: |
         cd frontend
         rm -rf node_modules package-lock.json
+        npm install --legacy-peer-dep
+
+    - name: Install dependencies
+      run: |
+        cd frontend
+        rm -rf node_modules package-lock.json
         npm ci
 
     - name: Fix react-scripts permissions
