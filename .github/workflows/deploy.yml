@@ -28,7 +28,8 @@ jobs:
     - name: Install dependencies
       run: |
         cd frontend
-        npm install --force
+        rm -rf node_modules package-lock.json
+        npm ci
 
     - name: Fix react-scripts permissions
       run: |
