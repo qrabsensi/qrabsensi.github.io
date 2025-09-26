@@ -3,8 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build-and-deploy:
@@ -22,9 +20,7 @@ jobs:
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
-        path: |
-          frontend/node_modules
-          frontend/.npm
+        path: frontend/node_modules
         key: ${{ runner.os }}-build-${{ hashFiles('frontend/package-lock.json') }}
         restore-keys: |
           ${{ runner.os }}-build-
@@ -40,9 +36,8 @@ jobs:
         npm run build
 
     - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: frontend/build
-        cname: qrabsensi.github.io
+        # Remove the "cname" line unless you use a custom domain
