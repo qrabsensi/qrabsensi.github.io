@@ -37,7 +37,7 @@ jobs:
 
     - name: Fix react-script to a certain version
       run: |
-        npm install react-scripts --legacy-peer-dep
+        npm install react-scripts@5.0.1 --legacy-peer-dep
 
     - name: Build
       run: |
