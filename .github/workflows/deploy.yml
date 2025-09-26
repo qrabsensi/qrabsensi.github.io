@@ -11,42 +11,38 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    steps:
     - name: Checkout
       uses: actions/checkout@v4
 
     - name: Setup Node.js
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-      - uses: actions/cache@v3
-        with:
-           path: node_modules
-            key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-      - run: npm install
-
-    - name: Install dependencies
-      run: |
-        cd QR/frontend
-        npm ci
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
 
     - name: Cache dependencies
       uses: actions/cache@v3
       with:
         path: |
-          QR/frontend/node_modules
-          QR/frontend/.npm
-        key: ${{ runner.os }}-build-${{ hashFiles('QR/frontend/package-lock.json') }}
+          frontend/node_modules
+          frontend/.npm
+        key: ${{ runner.os }}-build-${{ hashFiles('frontend/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
+
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm ci
 
     - name: Build
       run: |
-        cd QR/frontend
+        cd frontend
         npm run build
-        
+
     - name: Deploy to GitHub Pages
       if: github.ref == 'refs/heads/main'
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: QR/frontend/build
+        publish_dir: frontend/build
         cname: qrabsensi.github.io
