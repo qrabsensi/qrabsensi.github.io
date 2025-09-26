@@ -30,6 +30,10 @@ jobs:
         cd frontend
         npm install --force
 
+    - name: Fix react-scripts permissions
+      run: chmod +x node_modules/.bin/react-scripts
+        working-directory: frontend
+
     - name: Build
       run: |
         cd frontend
