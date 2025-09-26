@@ -32,8 +32,8 @@ jobs:
 
     - name: Fix react-scripts permissions
       run: |
-        chmod +x qrabsensi.github.io\frontend\node_modules\react-scripts
-        working-directory: frontend
+        chmod +x node_modules/.bin/react-scripts
+      working-directory: frontend
 
     - name: Build
       run: |
